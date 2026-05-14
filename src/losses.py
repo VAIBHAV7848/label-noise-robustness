@@ -85,10 +85,11 @@ class GeneralizedCrossEntropy(nn.Module):
     Args:
         q: exponent parameter, default 0.7 (good empirical default).
         k: truncation threshold — ignore samples where p_y < k to
-           further stabilise training. Default 0.5.
+           further stabilise training. Default 0.0 (disabled).
+           Set to ~0.1 for extra noise robustness on very noisy data.
     """
 
-    def __init__(self, q: float = 0.7, k: float = 0.5):
+    def __init__(self, q: float = 0.7, k: float = 0.0):
         super().__init__()
         assert 0 < q <= 1, f"q must be in (0, 1], got {q}"
         self.q = q
