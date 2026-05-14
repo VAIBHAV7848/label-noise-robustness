@@ -203,10 +203,13 @@ def generate_results_table(results, save_dir=None):
     df.to_csv(csv_path, index=False)
     print(f"  [Table] Saved CSV: {csv_path}")
 
-    # Save LaTeX
-    latex_path = os.path.join(save_dir, "results_summary.tex")
-    df.to_latex(latex_path, index=False, float_format="%.4f")
-    print(f"  [Table] Saved LaTeX: {latex_path}")
+    # Save LaTeX (optional — requires jinja2 >= 3.1.5)
+    try:
+        latex_path = os.path.join(save_dir, "results_summary.tex")
+        df.to_latex(latex_path, index=False, float_format="%.4f")
+        print(f"  [Table] Saved LaTeX: {latex_path}")
+    except (ImportError, Exception) as e:
+        print(f"  [Table] LaTeX export skipped ({e})")
 
     # Print to console
     print("\n" + "=" * 80)

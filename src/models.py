@@ -39,7 +39,6 @@ def get_sklearn_model(name: str):
             max_iter=config.LR_MAX_ITER,
             solver=config.LR_SOLVER,
             random_state=config.SEED,
-            n_jobs=-1,
         )
     elif name == "tree":
         return DecisionTreeClassifier(
